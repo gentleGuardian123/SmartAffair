@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/examples.dir/1_ckks_example.cpp.o  -o bin/examples  ../../../libs/lib/libseal-4.1.a -pthread 

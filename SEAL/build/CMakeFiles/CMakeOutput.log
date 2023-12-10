@@ -1458,3 +1458,24 @@ Source file was:
                 volatile auto fun = std::for_each_n(a, 1, [](auto b) {});
                 return 0;
             }
+Performing C++ SOURCE FILE Test USE_STD_FOR_EACH_N succeeded with the following output:
+Change Dir: /home/wentao/workspace/wentao/SmartAffair/SEAL/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_330bb/fast && /usr/bin/make -f CMakeFiles/cmTC_330bb.dir/build.make CMakeFiles/cmTC_330bb.dir/build
+make[1]: Entering directory '/home/wentao/workspace/wentao/SmartAffair/SEAL/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_330bb.dir/src.cxx.o
+/usr/bin/c++    -DUSE_STD_FOR_EACH_N  -O0 -std=c++17 -fPIE   -o CMakeFiles/cmTC_330bb.dir/src.cxx.o -c /home/wentao/workspace/wentao/SmartAffair/SEAL/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_330bb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_330bb.dir/link.txt --verbose=1
+/usr/bin/c++   -DUSE_STD_FOR_EACH_N  -O0 -std=c++17    CMakeFiles/cmTC_330bb.dir/src.cxx.o  -o cmTC_330bb 
+make[1]: Leaving directory '/home/wentao/workspace/wentao/SmartAffair/SEAL/build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+
+            #include <algorithm>
+            int main() {
+                int a[1]{ 0 };
+                volatile auto fun = std::for_each_n(a, 1, [](auto b) {});
+                return 0;
+            }

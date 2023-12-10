@@ -1,5 +1,5 @@
-prefix=/usr/local
-exec_prefix=/usr/local
+prefix=/home/wentao/workspace/wentao/SmartAffair/lib
+exec_prefix=/home/wentao/workspace/wentao/SmartAffair/lib
 libdir=/usr/local/lib
 sharedlibdir=/usr/local/lib
 includedir=/usr/local/include
