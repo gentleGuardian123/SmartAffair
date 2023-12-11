@@ -1,5 +1,0 @@
-/home/wentao/workspace/wentao/SmartAffair/build/CMakeFiles/rebuild_cache.dir
-/home/wentao/workspace/wentao/SmartAffair/build/CMakeFiles/edit_cache.dir
-/home/wentao/workspace/wentao/SmartAffair/build/native/examples/CMakeFiles/rebuild_cache.dir
-/home/wentao/workspace/wentao/SmartAffair/build/native/examples/CMakeFiles/edit_cache.dir
-/home/wentao/workspace/wentao/SmartAffair/build/native/examples/CMakeFiles/examples.dir
