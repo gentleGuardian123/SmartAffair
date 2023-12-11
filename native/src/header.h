@@ -17,4 +17,4 @@
 #include <thread>
 #include <vector>
 
-void same_or(CKKSEncoder encoder, Ciphertext src_bit_1, Ciphertext src_bit_2, Ciphertext dest_bit);
+void same_or(seal::CKKSEncoder encoder, seal::Ciphertext src_bit_1, seal::Ciphertext src_bit_2, seal::Ciphertext dest_bit);
