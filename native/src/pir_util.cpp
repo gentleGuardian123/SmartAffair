@@ -35,9 +35,10 @@ void verify_encryption_params(const seal::EncryptionParameters &enc_params) {
     return;
 }
 
-void gen_pir_params(uint32_t tot_data_dim, uint32_t usr_data_num, uint8_t data_size,  PirParams &pir_params) {
+void gen_pir_params(uint32_t tot_data_dim, uint32_t usr_data_dim, uint8_t data_size,  PirParams &pir_params) {
     pir_params.data_size = data_size;
-    pir_params.usr_data_num = usr_data_num;
+    pir_params.usr_data_dim = usr_data_dim;
+    pir_params.usr_data_num = 1 << tot_data_dim;
     pir_params.tot_data_dim = tot_data_dim;
     pir_params.tot_data_num = 1 << tot_data_dim;
 

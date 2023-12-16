@@ -8,9 +8,10 @@ typedef std::vector<seal::Ciphertext> PirQuery;
 typedef seal::Ciphertext PirReply;
 
 struct PirParams {
-    std::uint64_t tot_data_num; // |N|, the total number of data in database.
+    std::uint64_t tot_data_num;  // |N|, the total number of data in database.
     std::uint32_t tot_data_dim;  // |B| = log|N|.
-    std::uint32_t usr_data_num; // |M|, the maximum number of data for one user.
+    std::uint32_t usr_data_num;  // |M|, the maximum number of data for one user.
+    std::uint32_t usr_data_dim;
     std::uint32_t data_size; 
 };
 
@@ -18,10 +19,14 @@ void gen_encryption_params(std::uint32_t poly_mod_deg, std::uint32_t plain_mod_d
 
 void verify_encryption_params(const seal::EncryptionParameters &enc_params);
 
-void gen_pir_params(uint32_t tot_data_dim, uint32_t usr_data_num, uint8_t data_size, PirParams &pir_params);
+void gen_pir_params(uint32_t tot_data_dim, uint32_t usr_data_dim, uint8_t data_size, PirParams &pir_params);
 
 void gen_params(std::uint32_t ploy_mod_deg, std::uint32_t plain_mod_deg, uint32_t tot_data_dim, uint32_t usr_data_num, uint8_t data_size, PirParams &pir_params, seal::EncryptionParameters &params);
 
 void print_pir_params(const PirParams &pir_params);
 
 void print_seal_params(const seal::EncryptionParameters &enc_params);
+
+void inline print_line() {
+    std::cout << std::endl;
+}
