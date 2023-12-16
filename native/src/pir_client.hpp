@@ -1,8 +1,8 @@
 #pragma once
 
-#include<pir_util.hpp>
-#include<memory>
-#include<vector>
+#include "pir_util.hpp"
+#include <memory>
+#include <vector>
 
 class PIRClient {
 public:
@@ -22,7 +22,7 @@ private:
   std::unique_ptr<seal::Decryptor> decryptor_;
   std::unique_ptr<seal::Evaluator> evaluator_;
   std::unique_ptr<seal::KeyGenerator> keygen_;
-  std::unique_ptr<seal::BatchEncoder> encoder_;
+  // std::unique_ptr<seal::BatchEncoder> encoder_;
   std::shared_ptr<seal::SEALContext> context_;
 };
 

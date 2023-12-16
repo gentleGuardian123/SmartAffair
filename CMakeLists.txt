@@ -4,3 +4,5 @@ project(SmartAffair LANGUAGES CXX C)
 
 add_subdirectory(native/examples)
 
+add_subdirectory(native/src)
+

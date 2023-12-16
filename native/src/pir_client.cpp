@@ -17,5 +17,5 @@ PIRClient::PIRClient(const EncryptionParameters &enc_params, const PirParams &pi
 
   decryptor_ = make_unique<Decryptor>(*context_, secret_key);
   evaluator_ = make_unique<Evaluator>(*context_);
-  encoder_ = make_unique<BatchEncoder>(*context_);
+  // encoder_ = make_unique<BatchEncoder>(*context_);
 }
