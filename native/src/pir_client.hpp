@@ -8,11 +8,11 @@ class PIRClient {
 public:
     PIRClient(const seal::EncryptionParameters &enc_params, const PirParams &pir_params);
 
-    PirQuery generate_query(std::uint64_t desiredIndex);
+    PirQuery generate_query(std::uint32_t desired_index);
 
-    int generate_serialized_query(std::uint64_t desiredIndex, std::stringstream &stream);
+    // int generate_serialized_query(std::uint32_t desired_index, std::stringstream &stream);
 
-    seal::Plaintext decrypt(seal::Ciphertext ct);
+    seal::Plaintext decrypt(PirReply reply);
 
 private:
   seal::EncryptionParameters enc_params_;
