@@ -18,6 +18,22 @@ void PIRServer::set_database(unique_ptr<vector<Plaintext>> &&db) {
     db_ = move(db);
 }
 
+void PIRServer::set_database(const std::unique_ptr<const std::uint8_t[]> &bytes, std::uint64_t tot_data_num, std::uint64_t data_size) {
+    auto result = make_unique<vector<Plaintext>>();
+
+    while (tot_data_num --) {
+        char hex[data_size*2 + 1];
+        bytes_to_hex(hex, data_size*2 + 1, bytes.get(), data_size);
+
+        cout << hex << endl;
+
+        Plaintext pt(hex);
+        result->push_back(move(pt));
+    }
+
+    set_database(move(result));
+}
+
 PirReply PIRServer::generate_reply(PirQuery &query) {
     PirReply reply;
 

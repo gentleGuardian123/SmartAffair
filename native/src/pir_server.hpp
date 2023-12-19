@@ -1,7 +1,6 @@
 #pragma once
 
 #include "pir_util.hpp"
-#include "pir_client.hpp"
 #include <map>
 #include <memory>
 #include <vector>
@@ -11,6 +10,8 @@ public:
     PIRServer(const seal::EncryptionParameters &enc_params, const PirParams &pir_params);
 
     void set_database(std::unique_ptr<Database> &&db);
+
+    void set_database(const std::unique_ptr<const std::uint8_t[]> &bytes, std::uint64_t tot_data_num, std::uint64_t data_size);
 
     // PirQuery deserialize_query(std::stringstream &stream);
 

@@ -27,6 +27,21 @@ void print_pir_params(const PirParams &pir_params);
 
 void print_seal_params(const seal::EncryptionParameters &enc_params);
 
+bool inline bytes_to_hex(char *dest, uint64_t dest_size, const uint8_t *bytes, uint64_t data_size) {
+    static const char hex_table[] = "0123456789ABCDEF";
+    if (dest_size < (data_size*2 + 1)) {
+        return false;
+    } else {
+        for (int i = 0; i < data_size; i ++) {
+            *dest++ = hex_table[bytes[i] >> 4];
+            *dest++ = hex_table[bytes[i] & 0xF];
+        }
+        *dest = 0;
+
+        return true;
+    }
+}
+
 void inline print_line() {
     std::cout << std::endl;
 }
