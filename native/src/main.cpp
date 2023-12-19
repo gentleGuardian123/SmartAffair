@@ -12,8 +12,8 @@ int main(int argc, char *argv[]) {
 
     uint32_t poly_mod_deg = 4096;
     uint32_t plain_mod_deg = 1024;
-    uint8_t tot_data_dim = 4;
-    uint32_t usr_data_dim = 2;
+    uint8_t tot_data_dim = 8;
+    uint32_t usr_data_dim = 4;
     uint8_t data_size = 8;
 
     EncryptionParameters enc_params(scheme_type::bfv);

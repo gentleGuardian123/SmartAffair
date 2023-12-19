@@ -54,12 +54,10 @@ void gen_params(uint32_t ploy_mod_deg, uint32_t plain_mod_deg, uint32_t tot_data
 
 void print_pir_params(const PirParams &pir_params) {
 
-    cout << "PIR Parameters" << endl;
+    cout << "PIR Parameters:" << endl;
     cout << "Dimension for number of total data: " << pir_params.tot_data_dim << endl;
     cout << "Number of data for one single user: " << pir_params.usr_data_num << endl;
     cout << "Size per data in the database: " << pir_params.data_size << endl;
-
-    cout << "==============================" << endl;
 
 }
 
@@ -68,7 +66,7 @@ void print_seal_params(const EncryptionParameters &enc_params) {
     Modulus t = enc_params.plain_modulus();
     std::uint32_t logt = floor(log2(t.value()));
 
-    cout << "SEAL encryption parameters" << endl;
+    cout << "SEAL encryption parameters:" << endl;
     cout << "Degree of polynomial modulus (N): " << N << endl;
     cout << "Size of plaintext modulus (log t): " << logt << endl;
     cout << "There are " << enc_params.coeff_modulus().size()
@@ -79,6 +77,6 @@ void print_seal_params(const EncryptionParameters &enc_params) {
       cout << "Size of coefficient modulus " << i << " (log q_" << i
            << "): " << logqi << endl;
     }
-    cout << "==============================" << endl;
+
 }
 

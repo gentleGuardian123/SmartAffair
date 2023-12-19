@@ -24,9 +24,6 @@ void PIRServer::set_database(const std::unique_ptr<const std::uint8_t[]> &bytes,
     while (tot_data_num --) {
         char hex[data_size*2 + 1];
         bytes_to_hex(hex, data_size*2 + 1, bytes.get(), data_size);
-
-        cout << hex << endl;
-
         Plaintext pt(hex);
         result->push_back(move(pt));
     }
@@ -36,6 +33,9 @@ void PIRServer::set_database(const std::unique_ptr<const std::uint8_t[]> &bytes,
 
 PirReply PIRServer::generate_reply(PirQuery &query) {
     PirReply reply;
+    KeyGenerator keygen(*context_);
+    RelinKeys relin_keys;
+    keygen.create_relin_keys(relin_keys);
 
     for (uint32_t i = 0; i < pir_params_.usr_data_num; i ++) {
         Ciphertext sor_product;
@@ -45,13 +45,23 @@ PirReply PIRServer::generate_reply(PirQuery &query) {
             if (! (_i & 1) ) {
                 Plaintext one("1");
                 evaluator_->negate_inplace(sor);
+                evaluator_->relinearize_inplace(sor, relin_keys);
                 evaluator_->add_plain_inplace(sor, one);
             }
-            evaluator_->multiply_inplace(sor_product, sor);
+            if (!t) {
+                sor_product = sor;
+            } else {
+                evaluator_->multiply_inplace(sor_product, sor);
+                evaluator_->relinearize_inplace(sor_product, relin_keys);
+            }
             _i = _i >> 1;
         }
         evaluator_->multiply_plain_inplace(sor_product, db_->operator[](i));
-        evaluator_->add_inplace(reply, sor_product);
+        if (!i) {
+            reply = sor_product;
+        } else {
+            evaluator_->add_inplace(reply, sor_product);
+        }
     }
 
     return reply;

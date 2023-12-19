@@ -15,14 +15,14 @@ public:
     seal::Plaintext decrypt(PirReply reply);
 
 private:
-  seal::EncryptionParameters enc_params_;
-  PirParams pir_params_;
+    seal::EncryptionParameters enc_params_;
+    PirParams pir_params_;
 
-  std::unique_ptr<seal::Encryptor> encryptor_;
-  std::unique_ptr<seal::Decryptor> decryptor_;
-  std::unique_ptr<seal::Evaluator> evaluator_;
-  std::unique_ptr<seal::KeyGenerator> keygen_;
-  // std::unique_ptr<seal::BatchEncoder> encoder_;
-  std::shared_ptr<seal::SEALContext> context_;
+    std::unique_ptr<seal::Encryptor> encryptor_;
+    std::unique_ptr<seal::Decryptor> decryptor_;
+    std::unique_ptr<seal::Evaluator> evaluator_;
+    std::unique_ptr<seal::KeyGenerator> keygen_;
+    // std::unique_ptr<seal::BatchEncoder> encoder_;
+    std::shared_ptr<seal::SEALContext> context_;
 };
 

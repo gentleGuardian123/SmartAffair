@@ -22,7 +22,7 @@ PIRClient::PIRClient(const EncryptionParameters &enc_params, const PirParams &pi
 }
 
 PirQuery PIRClient::generate_query(uint32_t desired_index) {
-    PirQuery query(pir_params_.tot_data_dim);
+    PirQuery query;
 
     uint32_t desired_index_ = desired_index;
     for (uint32_t i = 0; i < pir_params_.tot_data_dim; i ++) {

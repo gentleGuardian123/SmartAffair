@@ -25,4 +25,6 @@ private:
     std::unique_ptr<Database> db_;
     std::unique_ptr<seal::Evaluator> evaluator_;
     std::shared_ptr<seal::SEALContext> context_;
+    // std::unique_ptr<seal::KeyGenerator> keygen_;
+    // std::unique_ptr<seal::RelinKeys> relin_keys_;
 };
