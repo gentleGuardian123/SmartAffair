@@ -24,5 +24,7 @@ private:
     std::unique_ptr<seal::KeyGenerator> keygen_;
     // std::unique_ptr<seal::BatchEncoder> encoder_;
     std::shared_ptr<seal::SEALContext> context_;
+
+    friend class PIRServer;
 };
 

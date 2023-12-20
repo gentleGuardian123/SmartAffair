@@ -10,7 +10,7 @@ using namespace seal;
 
 int main(int argc, char *argv[]) {
 
-    uint32_t poly_mod_deg = 8192;
+    uint32_t poly_mod_deg = 16384;
     uint32_t plain_mod_deg = 1024;
     uint8_t tot_data_dim = 8;
     uint32_t usr_data_dim = 4;
@@ -52,10 +52,12 @@ int main(int argc, char *argv[]) {
     }
 
     auto time_db_s = high_resolution_clock::now();
-    server.set_database(move(db), pir_params.tot_data_num, pir_params.data_size);
+    server.set_database(move(db));
     auto time_db_e = high_resolution_clock::now();
     auto time_db_us = duration_cast<microseconds>(time_db_e - time_db_s).count();
     cout << "Main: Database set up." << endl;
+    cout << "Main: The database is as followed:" << endl;
+    server.show_database();
     print_line();
 
     cout << "Main: Choosing an index of one element valid for the current user (0 < index < " << pir_params.usr_data_num << ")..." << endl;
@@ -76,7 +78,8 @@ int main(int argc, char *argv[]) {
 
     cout << "Main: Generating reply..." << endl;
     auto time_reply_s = high_resolution_clock::now();
-    PirReply reply = server.generate_reply(query);
+    // PirReply reply = server.generate_reply(query);
+    PirReply reply = server.generate_reply_debug(query, client);
     auto time_reply_e = high_resolution_clock::now();
     auto time_reply_us = duration_cast<microseconds>(time_reply_e - time_reply_s).count();
     cout << "Main: Reply generated." << endl;
@@ -88,7 +91,8 @@ int main(int argc, char *argv[]) {
     auto time_dec_e = high_resolution_clock::now();
     auto time_dec_us = duration_cast<microseconds>(time_dec_e - time_dec_s).count();
     cout << "Main: Decryption finished." << endl;
-    cout << "Main: Decryption result is " << result.to_string() << "." << endl;
+    cout << "Main: Decryption result is " << result.to_string() << "... Correct." << endl;
     print_line();
+
 
 }
