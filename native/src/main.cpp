@@ -10,11 +10,11 @@ using namespace seal;
 
 int main(int argc, char *argv[]) {
 
-    uint32_t poly_mod_deg = 4096;
+    uint32_t poly_mod_deg = 8192;
     uint32_t plain_mod_deg = 1024;
     uint8_t tot_data_dim = 8;
     uint32_t usr_data_dim = 4;
-    uint8_t data_size = 8;
+    uint8_t data_size = 1;
 
     EncryptionParameters enc_params(scheme_type::bfv);
     PirParams pir_params;
@@ -51,10 +51,10 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    auto time_pre_s = high_resolution_clock::now();
+    auto time_db_s = high_resolution_clock::now();
     server.set_database(move(db), pir_params.tot_data_num, pir_params.data_size);
-    auto time_pre_e = high_resolution_clock::now();
-    auto time_db_us = duration_cast<microseconds>(time_pre_e - time_pre_s).count();
+    auto time_db_e = high_resolution_clock::now();
+    auto time_db_us = duration_cast<microseconds>(time_db_e - time_db_s).count();
     cout << "Main: Database set up." << endl;
     print_line();
 
