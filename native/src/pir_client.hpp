@@ -8,6 +8,8 @@ class PIRClient {
 public:
     PIRClient(const seal::EncryptionParameters &enc_params, const PirParams &pir_params);
 
+    seal::RelinKeys gen_relin_keys();
+
     PirQuery generate_query(std::uint32_t desired_index);
 
     // int generate_serialized_query(std::uint32_t desired_index, std::stringstream &stream);

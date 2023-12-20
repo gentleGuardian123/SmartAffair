@@ -18,9 +18,9 @@ public:
 
     // PirQuery deserialize_query(std::stringstream &stream);
 
-    PirReply generate_reply(PirQuery &query);
+    PirReply generate_reply(PirQuery &query, seal::RelinKeys relin_keys);
 
-    PirReply generate_reply_debug(PirQuery &query, PIRClient &client);
+    PirReply generate_reply_debug(PirQuery &query, seal::RelinKeys relin_keys);
 
     // int serialize_reply(PirReply &reply, std::stringstream &stream);
     

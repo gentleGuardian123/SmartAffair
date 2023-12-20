@@ -21,6 +21,13 @@ PIRClient::PIRClient(const EncryptionParameters &enc_params, const PirParams &pi
     // encoder_ = make_unique<BatchEncoder>(*context_);
 }
 
+RelinKeys PIRClient::gen_relin_keys() {
+    RelinKeys relin_keys;
+    keygen_->create_relin_keys(relin_keys);
+
+    return relin_keys;
+}
+
 PirQuery PIRClient::generate_query(uint32_t desired_index) {
     PirQuery query;
 

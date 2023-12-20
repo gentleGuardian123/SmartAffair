@@ -49,11 +49,8 @@ void PIRServer::show_database() {
 
 }
 
-PirReply PIRServer::generate_reply(PirQuery &query) {
+PirReply PIRServer::generate_reply(PirQuery &query, RelinKeys relin_keys) {
     PirReply reply;
-    KeyGenerator keygen(*context_);
-    RelinKeys relin_keys;
-    keygen.create_relin_keys(relin_keys);
 
     for (uint32_t i = 0; i < pir_params_.usr_data_num; i ++) {
         Ciphertext xnor_product;
@@ -85,10 +82,8 @@ PirReply PIRServer::generate_reply(PirQuery &query) {
     return reply;
 }
 
-PirReply PIRServer::generate_reply_debug(PirQuery &query, PIRClient &client) {
+PirReply PIRServer::generate_reply_debug(PirQuery &query, RelinKeys relin_keys) {
     PirReply reply;
-    RelinKeys relin_keys;
-    client.keygen_->create_relin_keys(relin_keys);
 
     for (uint32_t i = 0; i < pir_params_.usr_data_num; i ++) {
         Ciphertext xnor_product;
