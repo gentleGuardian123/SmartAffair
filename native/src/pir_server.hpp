@@ -16,13 +16,11 @@ public:
 
     void show_database();
 
-    // PirQuery deserialize_query(std::stringstream &stream);
-
     PirReply generate_reply(PirQuery &query, seal::RelinKeys relin_keys);
 
     PirReply generate_reply_debug(PirQuery &query, seal::RelinKeys relin_keys);
 
-    // int serialize_reply(PirReply &reply, std::stringstream &stream);
+    int serialize_reply(PirReply &reply, std::stringstream &stream);
     
 private:
     seal::EncryptionParameters enc_params_; // SEAL parameters

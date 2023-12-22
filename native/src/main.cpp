@@ -37,6 +37,11 @@ int main(int argc, char *argv[]) {
     cout << "Main: Initializing server..." << endl;
     PIRServer server(enc_params, pir_params);
 
+    stringstream client_stream_for_valid;
+    stringstream server_stream_for_valid;
+    stringstream client_stream_for_invalid;
+    stringstream server_stream_for_invalid;
+
     cout << "Main: Creating the database with random data (this may take some time) ..." << endl;
 
     auto db(make_unique<uint8_t[]>(pir_params.tot_data_num * pir_params.data_size));
@@ -74,6 +79,7 @@ int main(int argc, char *argv[]) {
     auto time_va_query_e = high_resolution_clock::now();
     auto time_va_query_us = duration_cast<microseconds>(time_va_query_e - time_va_query_s).count();
     cout << "Main: Valid query generated." << endl;
+    int valid_query_size = client.generate_serialized_query(valid_desired_index, client_stream_for_valid);
     print_line();
 
     cout << "Main: Generating reply for valid index..." << endl;
@@ -82,6 +88,7 @@ int main(int argc, char *argv[]) {
     auto time_va_reply_e = high_resolution_clock::now();
     auto time_va_reply_us = duration_cast<microseconds>(time_va_reply_e - time_va_reply_s).count();
     cout << "Main: Reply for valid query generated." << endl;
+    int valid_reply_size = server.serialize_reply(valid_reply, server_stream_for_valid);
     print_line();
 
     cout << "Main: Decrypting reply..." << endl;
@@ -99,6 +106,7 @@ int main(int argc, char *argv[]) {
     auto time_iva_query_e = high_resolution_clock::now();
     auto time_iva_query_us = duration_cast<microseconds>(time_iva_query_e - time_iva_query_s).count();
     cout << "Main: Valid query generated." << endl;
+    int invalid_query_size = client.generate_serialized_query(invalid_desired_index, client_stream_for_invalid);
     print_line();
 
     cout << "Main: Generating reply for invalid index..." << endl;
@@ -107,6 +115,7 @@ int main(int argc, char *argv[]) {
     auto time_iva_reply_e = high_resolution_clock::now();
     auto time_iva_reply_us = duration_cast<microseconds>(time_iva_reply_e - time_iva_reply_s).count();
     cout << "Main: Reply for valid query generated." << endl;
+    int invalid_reply_size = server.serialize_reply(invalid_reply, server_stream_for_invalid);
     print_line();
 
     cout << "Main: Decrypting reply..." << endl;
@@ -115,13 +124,16 @@ int main(int argc, char *argv[]) {
     auto time_iva_dec_e = high_resolution_clock::now();
     auto time_iva_dec_us = duration_cast<microseconds>(time_iva_dec_e - time_iva_dec_s).count();
     cout << "Main: Decryption finished." << endl;
-    cout << "Main: Decryption result is " << invalid_result.to_string() << "... Retrieve nothing." << endl;
+    cout << "Main: Decryption result is " << invalid_result.to_string() << "... Retrieved nothing." << endl;
     print_line();
 
     cout << "Main: The benchmark result:" << endl;
-    cout << "Main: Time spent on database setup on server-side:\t\t\t\t" << time_db_us << "us" << endl;
-    cout << "Main: Time spent on average(valid or invalid) query generation on client-side:\t" << (time_va_query_us + time_iva_query_us) / 1000 << "ms" << endl;
-    cout << "Main: Time spent on average(valid or invalid) reply generation on server-side:\t" << (time_va_reply_us + time_iva_reply_us) / 1000 << "ms" << endl;
-    cout << "Main: Time spent on average(valid or invalid) decryption on client-side:\t" << (time_va_dec_us + time_iva_dec_us) / 1000 << "ms" << endl;
+    cout << "Main: Time spent on database setup on server-side:\t" << time_db_us << "us" << endl;
+    cout << "Main: Time spent on query generation on client-side:\t" << (time_va_query_us + time_iva_query_us) / 2000 << "ms" << endl;
+    cout << "Main: Time spent on reply generation on server-side:\t" << (time_va_reply_us + time_iva_reply_us) / 2000 << "ms" << endl;
+    cout << "Main: Time spent on decryption on client-side:\t\t" << (time_va_dec_us + time_iva_dec_us) / 2000 << "ms" << endl;
+    cout << "Main: Query overhead on client-side:\t" << (valid_query_size + invalid_query_size) / 2048 << " KB" << endl;
+    cout << "Main: Reply overhead on server-side:\t" << (valid_reply_size + invalid_reply_size) / 2048 << " KB" << endl;
+    cout << "Main: Total communication overhead:\t" << (valid_query_size + invalid_query_size + valid_query_size + invalid_query_size) / 2048 << " KB" << endl;
 
 }

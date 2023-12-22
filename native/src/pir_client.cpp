@@ -43,6 +43,19 @@ PirQuery PIRClient::generate_query(uint32_t desired_index) {
     return query;
 }
 
+int PIRClient::generate_serialized_query(std::uint32_t desired_index, std::stringstream &stream) {
+    int output_size = 0;
+
+    uint32_t desired_index_ = desired_index;
+    for (uint32_t i = 0; i < pir_params_.tot_data_dim; i ++) {
+        Plaintext pt(desired_index_ & 1 ? "1" : "0");
+        output_size += encryptor_->encrypt(pt).save(stream);
+        desired_index_ = desired_index_ >> 1;
+    }
+
+    return output_size;
+}
+
 Plaintext PIRClient::decrypt(PirReply reply) {
     Plaintext pt;
     decryptor_->decrypt(reply, pt);

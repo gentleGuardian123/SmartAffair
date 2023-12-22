@@ -12,7 +12,7 @@ public:
 
     PirQuery generate_query(std::uint32_t desired_index);
 
-    // int generate_serialized_query(std::uint32_t desired_index, std::stringstream &stream);
+    int generate_serialized_query(std::uint32_t desired_index, std::stringstream &stream);
 
     seal::Plaintext decrypt(PirReply reply);
 

@@ -82,6 +82,10 @@ PirReply PIRServer::generate_reply(PirQuery &query, RelinKeys relin_keys) {
     return reply;
 }
 
+int PIRServer::serialize_reply(PirReply &reply, std::stringstream &stream) {
+    return reply.save(stream);
+}
+
 PirReply PIRServer::generate_reply_debug(PirQuery &query, RelinKeys relin_keys) {
     PirReply reply;
 
