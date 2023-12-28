@@ -12,8 +12,8 @@ int main(int argc, char *argv[]) {
 
     uint32_t poly_mod_deg = 16384;
     uint32_t plain_mod_deg = 1024;
-    uint8_t tot_data_dim = 4;
-    uint32_t usr_data_dim = 3;
+    uint8_t tot_data_dim = 16;
+    uint32_t usr_data_dim = 8;
     uint8_t data_size = 1;
 
     EncryptionParameters enc_params(scheme_type::bfv);
@@ -134,6 +134,6 @@ int main(int argc, char *argv[]) {
     cout << "Main: Time spent on decryption on client-side:\t\t" << (time_va_dec_us + time_iva_dec_us) / 2000 << "ms" << endl;
     cout << "Main: Query overhead on client-side:\t" << (valid_query_size + invalid_query_size) / 2048 << " KB" << endl;
     cout << "Main: Reply overhead on server-side:\t" << (valid_reply_size + invalid_reply_size) / 2048 << " KB" << endl;
-    cout << "Main: Total communication overhead:\t" << (valid_query_size + invalid_query_size + valid_query_size + invalid_query_size) / 2048 << " KB" << endl;
+    cout << "Main: Total communication overhead:\t" << (valid_query_size + invalid_query_size + valid_reply_size + invalid_reply_size) / 2048 << " KB" << endl;
 
 }
